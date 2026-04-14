@@ -67,7 +67,7 @@ export default function ReservationSection() {
     <section id="reservation" className="py-14 sm:py-20 md:py-28 bg-dark relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[url('/images/reservation-bg.jpg')] bg-cover bg-center bg-fixed opacity-10" />
+        <div className="absolute inset-0 bg-[url('/images/reservation-bg.jpg')] bg-cover bg-center opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark/95 to-dark" />
       </div>
 

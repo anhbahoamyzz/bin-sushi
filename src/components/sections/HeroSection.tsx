@@ -68,10 +68,10 @@ export default function HeroSection() {
       {/* === JAPANESE VINTAGE BACKGROUND === */}
       <div className="absolute inset-0 bg-[#1a1510]">
         {/* Warm vintage base gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,168,83,0.15)_0%,_rgba(139,90,43,0.06)_40%,_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,168,83,0.08)_0%,_rgba(139,90,43,0.04)_40%,_transparent_70%)]" />
 
         {/* Top warm glow - like paper lantern */}
-        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse,_rgba(212,168,83,0.12)_0%,_transparent_70%)]" />
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse,_rgba(212,168,83,0.06)_0%,_transparent_70%)]" />
 
         {/* Corner accents - crimson red Japanese style */}
         <div className="absolute -top-20 -right-20 w-[400px] h-[400px] bg-[radial-gradient(circle,_rgba(180,40,50,0.1)_0%,_transparent_60%)]" />
@@ -113,8 +113,8 @@ export default function HeroSection() {
         <div className="absolute top-[15%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
         <div className="absolute bottom-[15%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
 
-        {/* Vintage paper texture noise */}
-        <div className="absolute inset-0 opacity-[0.08]" style={{
+        {/* Vintage paper texture noise - hidden on mobile for performance */}
+        <div className="absolute inset-0 opacity-[0.05] hidden sm:block" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E")`,
         }} />
 
