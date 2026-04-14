@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ImageIcon, List } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -18,16 +18,25 @@ function CategoryTab({
   onClick: () => void;
 }) {
   return (
-    <button
+    <motion.button
       onClick={onClick}
-      className={`shrink-0 px-4 py-2 text-xs md:text-sm tracking-wider uppercase rounded-sm transition-all duration-300 whitespace-nowrap ${
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className={`relative shrink-0 px-4 py-2 text-xs md:text-sm tracking-wider uppercase rounded-sm transition-colors duration-300 whitespace-nowrap ${
         isActive
-          ? "bg-gold text-dark font-medium"
+          ? "text-dark font-medium"
           : "border border-white/10 text-silver/70 hover:border-gold/50 hover:text-gold"
       }`}
     >
-      {cat.name}
-    </button>
+      {isActive && (
+        <motion.div
+          layoutId="activeTab"
+          className="absolute inset-0 bg-gold rounded-sm"
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        />
+      )}
+      <span className="relative z-10">{cat.name}</span>
+    </motion.button>
   );
 }
 
@@ -133,14 +142,16 @@ export default function MenuSection() {
             className="flex gap-2 overflow-x-auto scrollbar-hide px-8 md:px-0 md:flex-wrap md:justify-center"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            {menuData.map((cat) => (
-              <CategoryTab
-                key={cat.id}
-                cat={cat}
-                isActive={activeCategory === cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-              />
-            ))}
+            <LayoutGroup>
+              {menuData.map((cat) => (
+                <CategoryTab
+                  key={cat.id}
+                  cat={cat}
+                  isActive={activeCategory === cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                />
+              ))}
+            </LayoutGroup>
           </div>
           <button
             onClick={() => scrollTabs("right")}
@@ -152,8 +163,10 @@ export default function MenuSection() {
 
         {/* View Mode Toggle */}
         <div className="flex justify-center gap-2 mb-8">
-          <button
+          <motion.button
             onClick={() => setViewMode("image")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className={`flex items-center gap-1.5 px-4 py-2 text-xs rounded-sm transition-all ${
               viewMode === "image"
                 ? "bg-gold/20 text-gold border border-gold/30"
@@ -162,9 +175,11 @@ export default function MenuSection() {
           >
             <ImageIcon size={14} />
             Hình ảnh
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => setViewMode("list")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className={`flex items-center gap-1.5 px-4 py-2 text-xs rounded-sm transition-all ${
               viewMode === "list"
                 ? "bg-gold/20 text-gold border border-gold/30"
@@ -173,7 +188,7 @@ export default function MenuSection() {
           >
             <List size={14} />
             Danh sách
-          </button>
+          </motion.button>
         </div>
 
         {/* Menu Content */}
@@ -259,12 +274,14 @@ export default function MenuSection() {
           <p className="text-silver/50 text-sm mb-4">
             Giá chưa bao gồm VAT · Menu có thể thay đổi theo mùa
           </p>
-          <a
+          <motion.a
             href="tel:0707797797"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className="inline-flex px-8 py-3.5 bg-primary text-white text-sm tracking-widest uppercase rounded-sm hover:bg-primary-light transition-all duration-300 shadow-lg shadow-primary/20"
           >
             Gọi đặt món: 0707.797.797
-          </a>
+          </motion.a>
         </AnimatedSection>
       </div>
     </section>

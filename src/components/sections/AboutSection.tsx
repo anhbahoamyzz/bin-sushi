@@ -1,17 +1,56 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { aboutStats, restaurant } from "@/data/restaurant";
 
 function CounterStat({ number, label, delay }: { number: string; label: string; delay: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    if (!isInView) return;
+    const numericPart = number.replace(/[^0-9.]/g, "");
+    const suffix = number.replace(/[0-9.]/g, "");
+    const target = parseFloat(numericPart);
+    const isDecimal = numericPart.includes(".");
+    const duration = 1500;
+    const steps = 40;
+    const increment = target / steps;
+    let current = 0;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      current = Math.min(current + increment, target);
+      setDisplay(
+        (isDecimal ? current.toFixed(1) : Math.round(current).toString()) + suffix
+      );
+      if (step >= steps) {
+        setDisplay(number);
+        clearInterval(timer);
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [isInView, number]);
+
   return (
-    <AnimatedSection delay={delay} className="text-center">
-      <p className="font-heading text-3xl md:text-4xl font-bold text-gradient-gold">{number}</p>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay }}
+      className="text-center"
+    >
+      <p className="font-heading text-3xl md:text-4xl font-bold text-gradient-gold">{display}</p>
       <p className="text-silver/70 text-xs md:text-sm mt-1 tracking-wide">{label}</p>
-    </AnimatedSection>
+    </motion.div>
   );
 }
 
@@ -32,7 +71,11 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mt-8 sm:mt-12">
           {/* Image Side */}
           <AnimatedSection direction="left" className="relative">
-            <div className="relative aspect-[4/5] rounded-lg overflow-hidden">
+            <motion.div
+              className="relative aspect-[4/5] rounded-lg overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.4 }}
+            >
               <Image
                 src="/images/about.jpg"
                 alt="BIN SUSHI không gian"
@@ -40,13 +83,13 @@ export default function AboutSection() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent" />
-            </div>
+            </motion.div>
             {/* Floating badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
               className="absolute -bottom-4 -right-2 sm:-bottom-6 sm:-right-4 md:right-8 glass-card rounded-lg p-3 sm:p-5 text-center"
             >
               <p className="font-heading text-3xl font-bold text-gold">5+</p>
@@ -72,24 +115,32 @@ export default function AboutSection() {
             </p>
 
             {/* Signature */}
-            <div className="pt-4 border-t border-white/10">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="pt-4 border-t border-white/10"
+            >
               <p className="text-gold font-heading text-lg italic">&quot;Mỗi miếng sushi, một câu chuyện&quot;</p>
               <p className="text-silver/60 text-sm mt-1">— Đội ngũ BIN SUSHI</p>
-            </div>
+            </motion.div>
 
-            <a
+            <motion.a
               href="#menu"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               className="inline-flex px-6 py-3 border border-gold text-gold text-sm tracking-widest uppercase rounded-sm hover:bg-gold hover:text-dark transition-all duration-300"
             >
               Khám phá thực đơn
-            </a>
+            </motion.a>
           </AnimatedSection>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mt-12 sm:mt-20 pt-8 sm:pt-12 border-t border-white/5">
           {aboutStats.map((stat, i) => (
-            <CounterStat key={stat.label} number={stat.number} label={stat.label} delay={i * 0.1} />
+            <CounterStat key={stat.label} number={stat.number} label={stat.label} delay={i * 0.15} />
           ))}
         </div>
       </div>

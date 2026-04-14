@@ -43,20 +43,32 @@ export default function TestimonialsSection() {
               transition={{ duration: 0.4 }}
               className="glass-card rounded-xl p-5 sm:p-8 md:p-12 text-center"
             >
-              <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-gold/30 mx-auto mb-4 sm:mb-6" />
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-gold/30 mx-auto mb-4 sm:mb-6" />
+              </motion.div>
 
               {/* Stars */}
               <div className="flex justify-center gap-1 mb-6">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
+                  <motion.div
                     key={i}
-                    size={18}
-                    className={
-                      i < testimonials[current].rating
-                        ? "text-gold fill-gold"
-                        : "text-white/20"
-                    }
-                  />
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.15 + i * 0.08, type: "spring", stiffness: 300 }}
+                  >
+                    <Star
+                      size={18}
+                      className={
+                        i < testimonials[current].rating
+                          ? "text-gold fill-gold"
+                          : "text-white/20"
+                      }
+                    />
+                  </motion.div>
                 ))}
               </div>
 
@@ -66,26 +78,38 @@ export default function TestimonialsSection() {
               </p>
 
               {/* Author */}
-              <div className="mt-5 sm:mt-8">
-                <div className="w-14 h-14 rounded-full bg-gold/20 border-2 border-gold/30 mx-auto mb-3 flex items-center justify-center">
+              <motion.div
+                className="mt-5 sm:mt-8"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <motion.div
+                  className="w-14 h-14 rounded-full bg-gold/20 border-2 border-gold/30 mx-auto mb-3 flex items-center justify-center"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.35, type: "spring", stiffness: 200 }}
+                >
                   <span className="text-gold font-heading text-xl font-bold">
                     {testimonials[current].name.charAt(0)}
                   </span>
-                </div>
+                </motion.div>
                 <p className="text-cream font-medium">{testimonials[current].name}</p>
                 <p className="text-silver/50 text-sm mt-1">{testimonials[current].date}</p>
-              </div>
+              </motion.div>
             </motion.div>
           </AnimatePresence>
 
           {/* Navigation */}
           <div className="flex justify-center items-center gap-6 mt-8">
-            <button
+            <motion.button
               onClick={prev}
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
               className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-silver/60 hover:border-gold hover:text-gold transition-all"
             >
               <ChevronLeft size={18} />
-            </button>
+            </motion.button>
 
             <div className="flex gap-2">
               {testimonials.map((_, i) => (
@@ -99,12 +123,14 @@ export default function TestimonialsSection() {
               ))}
             </div>
 
-            <button
+            <motion.button
               onClick={next}
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
               className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-silver/60 hover:border-gold hover:text-gold transition-all"
             >
               <ChevronRight size={18} />
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
