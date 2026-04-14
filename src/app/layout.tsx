@@ -99,7 +99,7 @@ export default function RootLayout({
                   closes: "22:00",
                 },
               ],
-              url: "https://binsushi.vn",
+              url: "https://binsushiainghia.com",
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: "4.8",
