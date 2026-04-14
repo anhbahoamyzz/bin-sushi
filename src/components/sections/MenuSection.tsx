@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ImageIcon, List } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -22,20 +22,13 @@ function CategoryTab({
       onClick={onClick}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className={`relative shrink-0 px-4 py-2 text-xs md:text-sm tracking-wider uppercase rounded-sm transition-colors duration-300 whitespace-nowrap ${
+      className={`shrink-0 px-4 py-2 text-xs md:text-sm tracking-wider uppercase rounded-sm transition-all duration-300 whitespace-nowrap ${
         isActive
-          ? "text-dark font-medium"
+          ? "bg-gold text-dark font-medium"
           : "border border-white/10 text-silver/70 hover:border-gold/50 hover:text-gold"
       }`}
     >
-      {isActive && (
-        <motion.div
-          layoutId="activeTab"
-          className="absolute inset-0 bg-gold rounded-sm"
-          transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        />
-      )}
-      <span className="relative z-10">{cat.name}</span>
+      {cat.name}
     </motion.button>
   );
 }
@@ -142,16 +135,14 @@ export default function MenuSection() {
             className="flex gap-2 overflow-x-auto scrollbar-hide px-8 md:px-0 md:flex-wrap md:justify-center"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            <LayoutGroup>
-              {menuData.map((cat) => (
-                <CategoryTab
-                  key={cat.id}
-                  cat={cat}
-                  isActive={activeCategory === cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                />
-              ))}
-            </LayoutGroup>
+            {menuData.map((cat) => (
+              <CategoryTab
+                key={cat.id}
+                cat={cat}
+                isActive={activeCategory === cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+              />
+            ))}
           </div>
           <button
             onClick={() => scrollTabs("right")}

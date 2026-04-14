@@ -29,7 +29,7 @@ export default function AnimatedSection({
     <motion.div
       initial={{ opacity: 0, ...initial }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-30px" }}
       transition={{ duration: 0.7, delay, ease: "easeOut" }}
       className={cn(className)}
     >
