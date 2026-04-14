@@ -28,13 +28,14 @@ export default function ReservationSection() {
     const people = formData.get("people") as string;
     const note = formData.get("note") as string;
 
-    const text = `🔔 ĐẶT BÀN MỚI
-
+    const text = `🔥 <b>ĐẶT BÀN MỚI</b>
 👤 Tên: ${name}
-📞 SĐT: ${phone}
+📞 <a href="tel:${phone}">${phone}</a>
 📅 Ngày: ${date}
 🕐 Giờ: ${time}
-👥 Số khách: ${people}${note ? `\n📝 Ghi chú: ${note}` : ""}`;
+👥 Số khách: ${people}${note ? `\n📝 Ghi chú: ${note}` : ""}
+
+📲 <a href="tel:${phone}">GỌI NGAY</a>`;
 
     try {
       const res = await fetch(
@@ -44,6 +45,7 @@ export default function ReservationSection() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             chat_id: TELEGRAM_CHAT_ID,
+            parse_mode: "HTML",
             text,
           }),
         }
