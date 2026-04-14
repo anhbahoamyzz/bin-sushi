@@ -150,18 +150,11 @@ export default function HeroSection() {
 
       {/* === CONTENT === */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-5 sm:px-6 text-center">
-        {/* Logo - ảnh gốc cắt tròn */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-4 sm:mb-6 relative"
-        >
+        {/* Logo */}
+        <div className="hero-logo mb-4 sm:mb-6 relative">
           {/* Outer rotating ring */}
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute -inset-2.5 sm:-inset-3 md:-inset-4 rounded-full"
+          <div
+            className="hero-ring absolute -inset-2.5 sm:-inset-3 md:-inset-4 rounded-full"
             style={{
               background:
                 "conic-gradient(from 0deg, transparent, rgba(192,192,192,0.15), transparent, rgba(212,168,83,0.1), transparent)",
@@ -170,7 +163,7 @@ export default function HeroSection() {
           {/* Static border ring */}
           <div className="absolute -inset-1 sm:-inset-1.5 md:-inset-2 rounded-full border border-gold/15" />
 
-          {/* Logo image - circular clip, blend mode makes dark bg transparent */}
+          {/* Logo image */}
           <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full overflow-hidden ring-1 ring-silver/20">
             <Image
               src="/images/logo.png"
@@ -183,30 +176,15 @@ export default function HeroSection() {
 
           {/* Glow */}
           <div className="absolute inset-0 rounded-full shadow-[0_0_40px_rgba(212,168,83,0.08)]" />
-        </motion.div>
+        </div>
 
         {/* Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-heading text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-[0.15em] sm:tracking-[0.2em] relative"
-        >
+        <h1 className="hero-title font-heading text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-[0.15em] sm:tracking-[0.2em] relative">
           <span className="text-gradient-silver">BIN SUSHI</span>
-          <motion.span
-            animate={{ x: ["-100%", "200%"] }}
-            transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent skew-x-12 pointer-events-none"
-          />
-        </motion.h1>
+        </h1>
 
         {/* Tagline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-2 sm:mt-3 flex items-center gap-3 sm:gap-4"
-        >
+        <div className="hero-tagline mt-2 sm:mt-3 flex items-center gap-3 sm:gap-4">
           <div className="flex items-center gap-1 sm:gap-1.5">
             <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 border border-gold/40" />
             <span className="w-8 sm:w-10 md:w-16 h-px bg-gradient-to-r from-transparent to-gold/50" />
@@ -218,25 +196,15 @@ export default function HeroSection() {
             <span className="w-8 sm:w-10 md:w-16 h-px bg-gradient-to-l from-transparent to-gold/50" />
             <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 border border-gold/40" />
           </div>
-        </motion.div>
+        </div>
 
         {/* Slogan */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-3 sm:mt-5 text-silver/60 text-sm sm:text-base md:text-lg lg:text-xl font-light tracking-wider italic"
-        >
+        <p className="hero-slogan mt-3 sm:mt-5 text-silver/60 text-sm sm:text-base md:text-lg lg:text-xl font-light tracking-wider italic">
           Tinh hoa ẩm thực Nhật Bản
-        </motion.p>
+        </p>
 
         {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mt-7 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0"
-        >
+        <div className="hero-cta mt-7 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
           <button
             onClick={() => {
               const el = document.getElementById("menu");
@@ -256,15 +224,10 @@ export default function HeroSection() {
             </span>
             <span className="absolute inset-0 bg-gold translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
           </a>
-        </motion.div>
+        </div>
 
         {/* Contact info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.3 }}
-          className="mt-6 sm:mt-10 flex flex-col items-center gap-1.5 sm:gap-2 px-4"
-        >
+        <div className="hero-contact mt-6 sm:mt-10 flex flex-col items-center gap-1.5 sm:gap-2 px-4">
           <p className="text-silver/35 text-[11px] sm:text-xs md:text-sm tracking-wide leading-relaxed">
             153 Huỳnh Thúc Kháng, TT Ái Nghĩa, H. Đại Lộc, Quảng Nam
           </p>
@@ -278,24 +241,21 @@ export default function HeroSection() {
             <Phone size={13} />
             0707.797.797
           </a>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}
+        className="hero-scroll absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
-        <motion.a
+        <a
           href="#about"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
           className="text-gold/30 hover:text-gold transition-colors"
         >
           <ChevronDown size={24} className="sm:w-7 sm:h-7" />
-        </motion.a>
+        </a>
       </motion.div>
 
       {/* Bottom gradient fade */}
