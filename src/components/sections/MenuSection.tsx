@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, ImageIcon, List } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { menuData, type MenuCategory } from "@/data/menu";
@@ -33,57 +33,8 @@ function CategoryTab({
   );
 }
 
-function MenuItemRow({ item, index }: { item: MenuCategory["items"][0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, delay: index * 0.02 }}
-      className="group flex items-start justify-between gap-3 py-3 border-b border-white/5 last:border-0 hover:bg-white/[0.02] px-3 -mx-3 rounded-sm transition-colors"
-    >
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2">
-          {item.code && (
-            <span className="text-gold/50 text-[11px] font-mono shrink-0">{item.code}</span>
-          )}
-          <h4 className="text-cream font-medium text-sm group-hover:text-gold transition-colors truncate">
-            {item.name}
-          </h4>
-        </div>
-        {item.nameVi && (
-          <p className="text-silver/50 text-xs mt-0.5 line-clamp-2">{item.nameVi}</p>
-        )}
-      </div>
-      <div className="shrink-0 text-right">
-        <span className="text-gold font-heading text-sm font-semibold">{item.price}</span>
-        <span className="text-gold/50 text-[10px] ml-0.5">vnđ</span>
-      </div>
-    </motion.div>
-  );
-}
-
-function ComboItemRow({ item, index }: { item: MenuCategory["items"][0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, delay: index * 0.03 }}
-      className="glass-card rounded-lg p-3 sm:p-4 hover:border-gold/30 transition-all duration-300"
-    >
-      <div className="flex items-start justify-between gap-3 mb-2">
-        <h4 className="text-cream font-heading text-base font-semibold">{item.code}</h4>
-        <span className="text-gold font-heading text-lg font-bold shrink-0">
-          {item.price}<span className="text-gold/50 text-xs ml-0.5">vnđ</span>
-        </span>
-      </div>
-      <p className="text-silver/60 text-xs leading-relaxed">{item.nameVi}</p>
-    </motion.div>
-  );
-}
-
 export default function MenuSection() {
   const [activeCategory, setActiveCategory] = useState(menuData[0].id);
-  const [viewMode, setViewMode] = useState<"image" | "list">("image");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const activeCat = menuData.find((c) => c.id === activeCategory)!;
@@ -152,111 +103,42 @@ export default function MenuSection() {
           </button>
         </AnimatedSection>
 
-        {/* View Mode Toggle */}
-        <div className="flex justify-center gap-2 mb-8">
-          <motion.button
-            onClick={() => setViewMode("image")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`flex items-center gap-1.5 px-4 py-2 text-xs rounded-sm transition-all ${
-              viewMode === "image"
-                ? "bg-gold/20 text-gold border border-gold/30"
-                : "text-silver/50 border border-white/10 hover:text-silver"
-            }`}
-          >
-            <ImageIcon size={14} />
-            Hình ảnh
-          </motion.button>
-          <motion.button
-            onClick={() => setViewMode("list")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`flex items-center gap-1.5 px-4 py-2 text-xs rounded-sm transition-all ${
-              viewMode === "list"
-                ? "bg-gold/20 text-gold border border-gold/30"
-                : "text-silver/50 border border-white/10 hover:text-silver"
-            }`}
-          >
-            <List size={14} />
-            Danh sách
-          </motion.button>
-        </div>
-
         {/* Menu Content */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${activeCategory}-${viewMode}`}
+            key={activeCategory}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
           >
-            {viewMode === "image" ? (
-              /* ======= IMAGE VIEW ======= */
-              <div className="flex flex-col items-center gap-6">
-                {isCombo ? (
-                  comboImages.map((src, i) => (
-                    <div key={src} className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl shadow-black/50">
-                      <Image
-                        src={src}
-                        alt={`Combo menu page ${i + 1}`}
-                        width={800}
-                        height={1100}
-                        className="w-full h-auto"
-                        quality={90}
-                      />
-                    </div>
-                  ))
-                ) : activeCat.image ? (
-                  <div
-                    className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl shadow-black/50 cursor-pointer group"
-                    onClick={() => setViewMode("list")}
-                  >
+            <div className="flex flex-col items-center gap-6">
+              {isCombo ? (
+                comboImages.map((src, i) => (
+                  <div key={src} className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl shadow-black/50">
                     <Image
-                      src={activeCat.image}
-                      alt={`${activeCat.name} menu`}
+                      src={src}
+                      alt={`Combo menu page ${i + 1}`}
                       width={800}
                       height={1100}
-                      className="w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="w-full h-auto"
                       quality={90}
                     />
-                    <div className="absolute inset-0 bg-dark/0 group-hover:bg-dark/30 transition-all duration-300 flex items-center justify-center">
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-gold/90 text-dark text-xs sm:text-sm font-medium px-5 py-2.5 rounded-sm tracking-wider uppercase">
-                        Xem danh sách giá
-                      </span>
-                    </div>
                   </div>
-                ) : null}
-              </div>
-            ) : (
-              /* ======= LIST VIEW ======= */
-              <>
-                <div className="text-center mb-8">
-                  <h3 className="font-heading text-2xl md:text-3xl font-bold text-gradient-gold">
-                    {activeCat.name}
-                  </h3>
-                  <p className="text-silver/40 text-sm mt-1">
-                    {activeCat.items.length} món
-                  </p>
+                ))
+              ) : activeCat.image ? (
+                <div className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl shadow-black/50">
+                  <Image
+                    src={activeCat.image}
+                    alt={`${activeCat.name} menu`}
+                    width={800}
+                    height={1100}
+                    className="w-full h-auto"
+                    quality={90}
+                  />
                 </div>
-
-                {isCombo ? (
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {activeCat.items.map((item, i) => (
-                      <ComboItemRow key={item.code} item={item} index={i} />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="glass-card rounded-xl p-3 sm:p-4 md:p-6">
-                    <div className="grid md:grid-cols-2 gap-x-4 md:gap-x-8">
-                      {activeCat.items.map((item, i) => (
-                        <MenuItemRow key={item.code || item.name} item={item} index={i} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
+              ) : null}
+            </div>
           </motion.div>
         </AnimatePresence>
 
