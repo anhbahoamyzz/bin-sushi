@@ -216,11 +216,11 @@ export default function HeroSection() {
             <span className="absolute inset-0 bg-primary-light translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
           </button>
           <a
-            href="#reservation"
+            href="tel:0707797797"
             className="group relative px-6 sm:px-8 py-3 sm:py-3.5 border border-gold/50 text-gold text-xs sm:text-sm tracking-widest uppercase rounded-sm overflow-hidden text-center"
           >
             <span className="relative z-10 group-hover:text-dark transition-colors duration-300">
-              Đặt bàn ngay
+              Gọi đặt món
             </span>
             <span className="absolute inset-0 bg-gold translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
           </a>
