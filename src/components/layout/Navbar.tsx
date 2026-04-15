@@ -12,7 +12,6 @@ const navLinks = [
   { href: "#menu", label: "Thực đơn" },
   { href: "#gallery", label: "Hình ảnh" },
   { href: "#testimonials", label: "Đánh giá" },
-  { href: "#reservation", label: "Đặt bàn" },
   { href: "#contact", label: "Liên hệ" },
 ];
 
@@ -82,10 +81,10 @@ export default function Navbar() {
             <span>0707.797.797</span>
           </a>
           <a
-            href="#reservation"
+            href="tel:0707797797"
             className="hidden md:inline-flex px-5 py-2.5 bg-primary text-white text-xs tracking-widest uppercase rounded-sm hover:bg-primary-light transition-all duration-300 shadow-lg shadow-primary/20"
           >
-            Đặt bàn
+            Gọi đặt món
           </a>
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -128,11 +127,10 @@ export default function Navbar() {
                 0707.797.797
               </a>
               <a
-                href="#reservation"
-                onClick={() => setIsMobileOpen(false)}
+                href="tel:0707797797"
                 className="mt-2 text-center px-5 py-3 bg-primary text-white text-xs tracking-widest uppercase rounded-sm"
               >
-                Đặt bàn ngay
+                Gọi đặt món
               </a>
             </div>
           </motion.div>
