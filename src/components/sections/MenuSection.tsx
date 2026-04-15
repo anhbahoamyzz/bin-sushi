@@ -1,61 +1,29 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { menuData, type MenuCategory } from "@/data/menu";
 
-function CategoryTab({
-  cat,
-  isActive,
-  onClick,
-}: {
-  cat: MenuCategory;
-  isActive: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <motion.button
-      onClick={onClick}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className={`shrink-0 px-4 py-2 text-xs md:text-sm tracking-wider uppercase rounded-sm transition-all duration-300 whitespace-nowrap ${
-        isActive
-          ? "bg-gold text-dark font-medium"
-          : "border border-white/10 text-silver/70 hover:border-gold/50 hover:text-gold"
-      }`}
-    >
-      {cat.name}
-    </motion.button>
-  );
-}
+const menuPages = [
+  { src: "/images/menu-pages/01-salat.jpg", alt: "Salat" },
+  { src: "/images/menu-pages/02-sashimi.jpg", alt: "Sashimi" },
+  { src: "/images/menu-pages/03-sushi.jpg", alt: "Sushi" },
+  { src: "/images/menu-pages/04-sushi-khe-lua.jpg", alt: "Sushi Khè Lửa" },
+  { src: "/images/menu-pages/05-maki.jpg", alt: "Maki" },
+  { src: "/images/menu-pages/06-cuon-phu.jpg", alt: "Cuộn Phủ (Roll)" },
+  { src: "/images/menu-pages/07-tempura.jpg", alt: "Tempura" },
+  { src: "/images/menu-pages/08-combo-1.jpg", alt: "Combo 1" },
+  { src: "/images/menu-pages/09-combo-2.jpg", alt: "Combo 2" },
+  { src: "/images/menu-pages/10-combo-3.jpg", alt: "Combo 3" },
+  { src: "/images/menu-pages/11-com.jpg", alt: "Cơm" },
+  { src: "/images/menu-pages/12-udon.jpg", alt: "Udon" },
+  { src: "/images/menu-pages/13-teppan-lau.jpg", alt: "Teppan & Lẩu" },
+  { src: "/images/menu-pages/14-trang-mieng.jpg", alt: "Tráng Miệng" },
+  { src: "/images/menu-pages/15-drinks.jpg", alt: "Drinks" },
+];
 
 export default function MenuSection() {
-  const [activeCategory, setActiveCategory] = useState(menuData[0].id);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const activeCat = menuData.find((c) => c.id === activeCategory)!;
-  const isCombo = activeCategory === "combo";
-
-  // Combo has 3 pages
-  const comboImages = [
-    "/images/menu-pages/08-combo-1.jpg",
-    "/images/menu-pages/09-combo-2.jpg",
-    "/images/menu-pages/10-combo-3.jpg",
-  ];
-
-  const scrollTabs = (dir: "left" | "right") => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({
-        left: dir === "left" ? -200 : 200,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <section id="menu" className="py-14 sm:py-20 md:py-28 bg-dark-light relative overflow-hidden">
       {/* Background pattern */}
@@ -73,74 +41,25 @@ export default function MenuSection() {
           description="Rất hân hạnh phục vụ Quý khách!"
         />
 
-        {/* Category Tabs with scroll */}
-        <AnimatedSection className="relative mb-8">
-          <button
-            onClick={() => scrollTabs("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-dark-light/90 border border-white/10 rounded-full flex items-center justify-center text-silver/60 hover:text-gold hover:border-gold/50 transition-all md:hidden"
-          >
-            <ChevronLeft size={16} />
-          </button>
-          <div
-            ref={scrollRef}
-            className="flex gap-2 overflow-x-auto scrollbar-hide px-8 md:px-0 md:flex-wrap md:justify-center"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {menuData.map((cat) => (
-              <CategoryTab
-                key={cat.id}
-                cat={cat}
-                isActive={activeCategory === cat.id}
-                onClick={() => setActiveCategory(cat.id)}
+        {/* Menu Grid - 2 columns */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          {menuPages.map((page, i) => (
+            <AnimatedSection
+              key={page.src}
+              delay={i < 4 ? i * 0.05 : 0}
+              className="relative rounded-xl overflow-hidden shadow-xl shadow-black/40"
+            >
+              <Image
+                src={page.src}
+                alt={page.alt}
+                width={800}
+                height={1100}
+                className="w-full h-auto"
+                loading={i < 4 ? "eager" : "lazy"}
               />
-            ))}
-          </div>
-          <button
-            onClick={() => scrollTabs("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-dark-light/90 border border-white/10 rounded-full flex items-center justify-center text-silver/60 hover:text-gold hover:border-gold/50 transition-all md:hidden"
-          >
-            <ChevronRight size={16} />
-          </button>
-        </AnimatedSection>
-
-        {/* Menu Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="flex flex-col items-center gap-6">
-              {isCombo ? (
-                comboImages.map((src, i) => (
-                  <div key={src} className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl shadow-black/50">
-                    <Image
-                      src={src}
-                      alt={`Combo menu page ${i + 1}`}
-                      width={800}
-                      height={1100}
-                      className="w-full h-auto"
-                      quality={90}
-                    />
-                  </div>
-                ))
-              ) : activeCat.image ? (
-                <div className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl shadow-black/50">
-                  <Image
-                    src={activeCat.image}
-                    alt={`${activeCat.name} menu`}
-                    width={800}
-                    height={1100}
-                    className="w-full h-auto"
-                    quality={90}
-                  />
-                </div>
-              ) : null}
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            </AnimatedSection>
+          ))}
+        </div>
 
         {/* CTA */}
         <AnimatedSection className="text-center mt-12">
