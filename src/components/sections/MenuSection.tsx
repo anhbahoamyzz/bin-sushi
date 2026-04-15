@@ -41,8 +41,8 @@ export default function MenuSection() {
           description="Rất hân hạnh phục vụ Quý khách!"
         />
 
-        {/* Menu Grid - 2 columns */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+        {/* Menu - 1 image per row */}
+        <div className="flex flex-col gap-4 sm:gap-6 max-w-2xl mx-auto">
           {menuPages.map((page, i) => (
             <AnimatedSection
               key={page.src}
