@@ -33,7 +33,7 @@ const contactInfo = [
 export default function ContactSection() {
   return (
     <section id="contact" className="py-14 sm:py-20 md:py-28 bg-dark-light">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
         <SectionHeading
           subtitle="Liên hệ"
           title="Đến Với Chúng Tôi"

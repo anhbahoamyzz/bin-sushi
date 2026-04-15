@@ -66,7 +66,7 @@ export default function HeroSection() {
   return (
     <section id="home" className="relative h-screen w-full overflow-hidden">
       {/* === JAPANESE VINTAGE BACKGROUND === */}
-      <div className="absolute inset-0 bg-[#1a1510]">
+      <div className="absolute inset-0 bg-dark">
         {/* Warm vintage base gradient */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,168,83,0.08)_0%,_rgba(139,90,43,0.04)_40%,_transparent_70%)]" />
 

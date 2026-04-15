@@ -25,7 +25,7 @@ const menuPages = [
 
 export default function MenuSection() {
   return (
-    <section id="menu" className="py-14 sm:py-20 md:py-28 bg-dark-light relative overflow-hidden">
+    <section id="menu" className="py-14 sm:py-20 md:py-28 bg-dark relative overflow-hidden">
       {/* Background pattern */}
       <div
         className="absolute inset-0 opacity-[0.02]"
@@ -34,7 +34,7 @@ export default function MenuSection() {
         }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 md:px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
         <SectionHeading
           subtitle="Thực đơn"
           title="Menu BIN SUSHI"

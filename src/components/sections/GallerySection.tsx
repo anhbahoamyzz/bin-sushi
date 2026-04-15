@@ -31,7 +31,7 @@ export default function GallerySection() {
   const others = galleryImages.slice(1);
 
   return (
-    <section id="gallery" className="py-14 sm:py-20 md:py-28 bg-dark relative">
+    <section id="gallery" className="py-14 sm:py-20 md:py-28 bg-dark-light relative">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/3 rounded-full blur-3xl" />
 
       <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">

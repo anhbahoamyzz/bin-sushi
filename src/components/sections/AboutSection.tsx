@@ -56,12 +56,12 @@ function CounterStat({ number, label, delay }: { number: string; label: string; 
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-14 sm:py-20 md:py-28 bg-dark relative overflow-hidden">
+    <section id="about" className="py-14 sm:py-20 md:py-28 bg-dark-light relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gold/3 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/3 rounded-full blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
         <SectionHeading
           subtitle="Về chúng tôi"
           title="Câu Chuyện BIN SUSHI"
@@ -99,7 +99,7 @@ export default function AboutSection() {
 
           {/* Text Side */}
           <AnimatedSection direction="right" className="space-y-6">
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-cream">
+            <h3 className="font-heading text-2xl md:text-3xl font-bold text-cream">
               Chào mừng đến với{" "}
               <span className="text-gradient-gold">BIN SUSHI</span>
             </h3>

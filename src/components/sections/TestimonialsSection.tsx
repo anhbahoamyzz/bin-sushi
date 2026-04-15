@@ -21,11 +21,11 @@ export default function TestimonialsSection() {
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
 
   return (
-    <section id="testimonials" className="py-14 sm:py-20 md:py-28 bg-dark-light relative overflow-hidden">
+    <section id="testimonials" className="py-14 sm:py-20 md:py-28 bg-dark relative overflow-hidden">
       {/* Background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/3 rounded-full blur-3xl" />
 
-      <div className="max-w-4xl mx-auto px-4 md:px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
         <SectionHeading
           subtitle="Đánh giá"
           title="Khách Hàng Nói Gì"
